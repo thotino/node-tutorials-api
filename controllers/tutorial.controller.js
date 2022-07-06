@@ -1,5 +1,5 @@
 const db = require('../models')
-
+const { Op } = db.Sequelize
 const create = async (req, res) => {
     const transaction = await db.sequelize.transaction()
     try {
@@ -10,8 +10,19 @@ const create = async (req, res) => {
         return res.send(createdTutorial) 
     } catch (error) {
         await transaction.rollback()
-        return res.send(error)
+        return res.send(error).status(500)
     }
 }
 
-module.exports = { create }
+const findAll = async (req, res) => {
+    try {
+        const { title } = req.query
+        const whereCondition = title ? { title: { [Op.like]: `%${title}%` } } : null
+        const allTutorials = await db.Tutorial.findAll({where: whereCondition })
+        return res.json(allTutorials)
+    } catch (error) {
+        return res.send(error).status(500)
+    }
+}
+
+module.exports = { create, findAll }

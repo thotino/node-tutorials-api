@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
-const { create } = require('./controllers/tutorial.controller')
+const { create, findAll } = require('./controllers/tutorial.controller')
 const db = require('./models')
 const app = express()
 
@@ -15,6 +15,8 @@ app.use(morgan('combined'))
 const PORT = process.env.PORT || 8080
 
 app.post('/tutorial', create)
+
+app.get('/tutorials', findAll)
 
 app.listen(PORT, async () => {
     console.log(`Listening on port ${PORT}`)
