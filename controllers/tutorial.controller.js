@@ -25,4 +25,13 @@ const findAll = async (req, res) => {
     }
 }
 
-module.exports = { create, findAll }
+const findAllPublished = async (req, res) => {
+    try {
+        const allPublishedTutorials = await db.Tutorial.findAll({where: { published: true } })
+        return res.json(allPublishedTutorials)
+    } catch (error) {
+        return res.send(error).status(500)
+    }
+}
+
+module.exports = { create, findAll, findAllPublished }
