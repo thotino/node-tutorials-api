@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
-const { create, findAll, findAllPublished } = require('./controllers/tutorial.controller')
+const { create, findAll, findAllPublished, deleteAll } = require('./controllers/tutorial.controller')
 const db = require('./models')
 const app = express()
 
@@ -19,6 +19,10 @@ app.post('/tutorial', create)
 app.get('/tutorials', findAll)
 
 app.get('/tutorials/published', findAllPublished)
+
+app.delete('/tutorials', deleteAll)
+
+app.delete('/tutorials/:id', deleteAll)
 
 app.listen(PORT, async () => {
     console.log(`Listening on port ${PORT}`)

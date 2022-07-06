@@ -34,4 +34,18 @@ const findAllPublished = async (req, res) => {
     }
 }
 
-module.exports = { create, findAll, findAllPublished }
+const deleteAll = async (req, res) => {
+    const transaction = await db.sequelize.transaction()
+    try {
+        const { id } = req.params
+        const whereCondition = id ? { id } : null
+        const numberOfDeletedInstances = await db.Tutorial.destroy({ where: whereCondition, transaction })
+        await transaction.commit()
+        return res.send(`${numberOfDeletedInstances} tutorials deleted`)
+    } catch (error) {
+        await transaction.rollback()
+        return res.send(error).status(500)
+    }
+}
+
+module.exports = { create, findAll, findAllPublished, deleteAll }
