@@ -11,7 +11,6 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(morgan('combined'))
 
-
 const PORT = process.env.PORT || 8080
 
 app.post('/tutorial', create)
@@ -27,8 +26,8 @@ app.delete('/tutorials', deleteAll)
 app.delete('/tutorials/:id', deleteAll)
 
 app.listen(PORT, async () => {
-    console.log(`Listening on port ${PORT}`)
-    await db.sequelize.sync()
+  console.log(`Listening on port ${PORT}`)
+  await db.sequelize.sync()
 })
 
 module.exports = app
