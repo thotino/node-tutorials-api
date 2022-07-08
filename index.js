@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
-const { create, find, findAll, findAllPublished, deleteAll } = require('./controllers/tutorial.controller')
+const { create, find, findAll, findAllPublished, deleteAll, updateOne } = require('./controllers/tutorial.controller')
 const db = require('./models')
 const app = express()
 
@@ -13,13 +13,15 @@ app.use(morgan('combined'))
 
 const PORT = process.env.PORT || 8080
 
-app.post('/tutorial', create)
+app.post('/tutorials', create)
 
 app.get('/tutorials/:id', find)
 
 app.get('/tutorials', findAll)
 
 app.get('/tutorials/published', findAllPublished)
+
+app.put('/tutorials/:id', updateOne)
 
 app.delete('/tutorials', deleteAll)
 

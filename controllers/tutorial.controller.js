@@ -18,7 +18,7 @@ const create = async (req, res) => {
 const find = async (req, res) => {
   try {
     const { id } = req.params
-    const tutorial = await db.Tutorial.findOne({ where: { id } })
+    const tutorial = await db.Tutorial.findByPk(id)
     return res.json(tutorial)
   } catch (error) {
     return res.send(error).status(500)
@@ -45,11 +45,25 @@ const findAllPublished = async (req, res) => {
   }
 }
 
+
+const updateOne = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { title, description, published } = req.body
+        const entity = await db.Tutorial.findByPk(id)
+        if (!entity) return res.status(404).send('ERR_TUTORIAL_NOT_FOUND')
+        const updated = await entity.update({ title, description, published })
+        return res.json(updated)
+    } catch (error) {
+        return res.send(error).status(500)
+    }
+}
+
 const deleteAll = async (req, res) => {
   const transaction = await db.sequelize.transaction()
   try {
     const { id } = req.params
-    const whereCondition = id ? { id } : null
+    const whereCondition = id ? { id } : {}
     const numberOfDeletedInstances = await db.Tutorial.destroy({ where: whereCondition, transaction })
     await transaction.commit()
     return res.send(`${numberOfDeletedInstances} tutorials deleted`)
@@ -59,4 +73,4 @@ const deleteAll = async (req, res) => {
   }
 }
 
-module.exports = { create, find, findAll, findAllPublished, deleteAll }
+module.exports = { create, find, findAll, findAllPublished, updateOne, deleteAll }
