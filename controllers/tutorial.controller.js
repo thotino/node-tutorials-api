@@ -29,6 +29,7 @@ const findAll = async (req, res) => {
   try {
     const { title } = req.query
     const whereCondition = title ? { title: { [Op.like]: `%${title}%` } } : null
+    console.log({ whereCondition })
     const allTutorials = await db.Tutorial.findAll({ where: whereCondition })
     return res.json(allTutorials)
   } catch (error) {
@@ -45,18 +46,17 @@ const findAllPublished = async (req, res) => {
   }
 }
 
-
 const updateOne = async (req, res) => {
-    try {
-        const { id } = req.params
-        const { title, description, published } = req.body
-        const entity = await db.Tutorial.findByPk(id)
-        if (!entity) return res.status(404).send('ERR_TUTORIAL_NOT_FOUND')
-        const updated = await entity.update({ title, description, published })
-        return res.json(updated)
-    } catch (error) {
-        return res.send(error).status(500)
-    }
+  try {
+    const { id } = req.params
+    const { title, description, published } = req.body
+    const entity = await db.Tutorial.findByPk(id)
+    if (!entity) return res.status(404).send('ERR_TUTORIAL_NOT_FOUND')
+    const updated = await entity.update({ title, description, published })
+    return res.json(updated)
+  } catch (error) {
+    return res.send(error).status(500)
+  }
 }
 
 const deleteAll = async (req, res) => {
