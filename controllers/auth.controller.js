@@ -36,7 +36,7 @@ const signin = async (req, res) => {
         const isPasswordValid = bcrypt.compare(password, user.password)
         if (!isPasswordValid) return res.status(401).send('ERR_INVALID_PASSWORD')
 
-        const token = jwt.sign({ id: user.id, username: user.username }, privateKey, { expiresIn: 86400 })
+        const token = jwt.sign({ id: user.id, username: user.username }, privateKey, { algorithm: 'RS512', expiresIn: 86400 })
         
         const allUserRoles = await user.getRoles()
         const authorities = allUserRoles.map(({ name }) => (`ROLE_${name.toUpperCase()}`))
