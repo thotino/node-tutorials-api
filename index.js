@@ -13,14 +13,13 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(morgan('combined'))
 
-
 const PORT = process.env.PORT || 8080
 
 app.post('/api/auth/signup', [checkDuplicateUser, checkRolesExisted], signup)
 
 app.post('/api/auth/signin', signin)
 
-app.post('/api/tutorials',[verifyToken, isModeratorOrAdmin], create)
+app.post('/api/tutorials', [verifyToken, isModeratorOrAdmin], create)
 
 app.get('/api/tutorials/:id', [verifyToken, isModerator], find)
 

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -11,22 +11,22 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('Roles', [{
-    id: 1,
-    name: 'user',
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString()
-   }, { 
-    id: 2, 
-    name: 'moderator',
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString()
-  }, { 
-    id: 3, 
-    name: 'admin',
-    createdAt: new Date().toDateString(),
-    updatedAt: new Date().toDateString()
-  }], {})
+    await queryInterface.bulkInsert('Roles', [{
+      id: 1,
+      name: 'user',
+      createdAt: new Date().toDateString(),
+      updatedAt: new Date().toDateString()
+    }, {
+      id: 2,
+      name: 'moderator',
+      createdAt: new Date().toDateString(),
+      updatedAt: new Date().toDateString()
+    }, {
+      id: 3,
+      name: 'admin',
+      createdAt: new Date().toDateString(),
+      updatedAt: new Date().toDateString()
+    }], {})
   },
 
   async down (queryInterface, Sequelize) {
@@ -36,6 +36,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkDelete('Roles', { id: { [Sequelize.Op.in]: [1, 2, 3] } })
+    await queryInterface.bulkDelete('Roles', { id: { [Sequelize.Op.in]: [1, 2, 3] } })
   }
-};
+}

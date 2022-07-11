@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon index.js",
-    "lint": "npm standard",
-    "lintfix": "npm standard --fix"
+    "lint": "./node_modules/.bin/standard .",
+    "lintfix": "./node_modules/.bin/standard . --fix"
   },
   "dependencies": {
     "express": "^4.18.1",
