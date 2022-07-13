@@ -88,3 +88,9 @@ typings/
 .dynamodb/
 
 .idea
+
+*.pem
+
+*.sqlite3
+.gitsecret/keys/random_seed
+!*.secret
