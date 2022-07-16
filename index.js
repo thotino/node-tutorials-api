@@ -13,7 +13,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(morgan('combined'))
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.APP_SERVER_PORT
 
 app.post('/api/auth/signup', [checkDuplicateUser, checkRolesExisted], signup)
 
