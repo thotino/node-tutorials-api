@@ -9,10 +9,18 @@ This project is inspired from [the BezKoder tutorial](https://www.bezkoder.com/n
 * CRUD services for the tutorials
 * Dockerization
 
-## Install and start
+## Install and start locally
 ```sh
 git clone https://github.com/thotino/node-tutorials-api.git
 cd node-tutorials-api
 npm install
 npm start
+```
+
+## Install and start with Docker
+```sh
+git clone https://github.com/thotino/node-tutorials-api.git
+cd node-tutorials-api
+docker build . -t tutorials-server
+docker run tutorials-server -p 3000:3000
 ```
